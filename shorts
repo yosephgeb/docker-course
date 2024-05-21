@@ -1,0 +1,31 @@
+Docker client -: the docker command used to control most of the docker workflow and talk to remote docker servers
+Docker server -: this is the dockerd command that is used to start the docker server process that builds and launches containers via a client
+
+OCI certification
+
+Even though containers provide some isolation from the underlying operating system, they still run
+ on the host kernel. Due to potential security risks, production containers should almost always 
+ be run in the context of an unprivileged user.
+
+ git clone https://github.com/spkane/docker-node-hello.git --config core.autocrlf=input
+
+ docker image build -t 'file location of the docker file' .(. to search in the current folder)
+ docker image build
+ docker build
+ docker container run --rm -d -p 9001:9001 docker-node-hello:latest
+ docker container ls  equvalent to docker container list
+ docker ps    equvalent to docker container ps
+ docker context list _: docker host ip address
+ docker image inspect docker-node-hello:latest | grep maintainer
+ docker image build --build-arg email=me@example.com -t example/docker-node-hello:latest . (to change the varaiable)
+ docker container stop "id of the container"  
+ 
+ docker container run --rm --publish mode=ingress,published=8080,target=8080  --env WHO="Sean and Karl" docker-node-hello:latest
+ docker container run --rm -d -p 8080:8080 -e WHO="Sean and Karl" docker-node-hello:latest
+
+ docker login
+ When you get Login Succeeded back from the server, you know you’re ready to pull images from the registry.
+  But what happened behind the scenes? It turns out that Docker has written a dotfile for you in your home 
+  directory to cache this information. The permissions are set to 0600 as a security precaution against other
+   users reading your credentials
+ ls -la ${HOME}/.docker/config.json _:

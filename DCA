@@ -1,0 +1,69 @@
+--------------Deleting all images---------------
+docker system prune -: for all images,container, volumes and network that are dangling'
+docker system prune -a -: delete all stopped container and unused images
+------------------------------------------------------------------------------
+------------------Network commands----------------------------------------
+ifconfig
+netstat -ntlp
+curl -I 'address'
+-------------------------------------------------------------------------------
+
+docker pull 'image name':'tag i.e version'  -: to pull from register
+docker run -dt -p 8080 'image name'
+docker ps -: to see all running containers
+docker stop 'container name' -: to stop a container
+docker ps -a -: see all container in relatin to ther status
+docker ps -all -: samme command as -a
+docker start 'container name' -: to start a container you stopped before
+docker inspect 'container name' -: to inspect a container
+docker container ls -aq -: gives all the id of the container
+dock container stop $(docker container ls -aq) -: stop all the container given the id
+docker container rm 'container id/nam -: removing. should be stopped first
+-----------------------------Docker exec----------------------------------------------------------------
+docker container exec -: to enter the running container and appy changes and thing like that.
+ 
+for ex if u have nginex it have bash shellprogramm so you can enter that.
+ex -: docker container run -d -p 81:80 --name docker-exec 'image name'
+docker container exec -it docker-exec bash
+you can do now like apt-get update, apt-get install netstat-tools then you can check by using
+netstat -ntlp. you can even directly use it from the terminal since you have updated the container
+docker container exec -it docker-exec netstal -ntlp
+the primary process should be running for the exec to work. PID/Program name should be 1/nginx: master pro
+if you enterd the bash using docker container exec -ti docker-exec bash and stopped the PID with
+going in to etc/init.d/nginx stop, then the process is stopped and the container is stopped also
+--------------------------------------------------------------------------------------------------
+
+process created in linux environment have three open file discriptors stdin, stdout, stderr
+-i keep the stdin open thus yr tty is not present
+-t gives you a tty but no way of stdin
+so -it gives you an interactive stdin
+they are two seperate flag so it can be expressed as -i -t but can be compined to -it
+-i is shorten for --interactive
+-t is for --tty
+                   
+Default container command
+ a default command execute which typically runs as PID 1
+this is found on the docker file in the CMD part then this will start automatically
+this is also displayed on the command on when running docker container ps.
+docker container run -dt nginx sleep 500 -: heare we have change the default comman for the 
+image
+
+Docker Restart policy
+when the docker daemon is restarted, the containers won't restart automatically
+systemctl restart docker
+flags are no(dont restart it is the default), on-failure(resart if stoped by error)
+unless-stopped(restart the container unless it is stopped specifially or docker is stopped or restarted)
+always(always restart the container if it stops)
+
+docker container run -d  --restart unless-stopped nginx
+docker container rm 'container name'
+docker container rm -f 'container name' since running containers can't be removed one can force them to be deleted. it is not advisabel
+
+disk usage on docker
+df -h -: linux command for disk usage
+docker system df -: disk usage by containers, images, local volumes
+docker system df -v -: per component disk usage
+docker log 'container name'
+docker container run --help
+docker container run --help | grep rm
+docker container run -dt --rm ....

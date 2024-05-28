@@ -67,3 +67,20 @@ docker log 'container name'
 docker container run --help
 docker container run --help | grep rm
 docker container run -dt --rm ....
+
+docker healt check
+if the --healthcheck is used and the option aren't specifed then default
+is used
+--interval will be 30s, --timeout become 30 s
+--start-period will be 0s, --retries will be 3 times
+0 success, 1 failure 2 reserved
+docker run -dt --name temp --health-cmd "curl -f http://localahost" busybox sh
+docker run -dt --name temp --healt-cmd "curl -f http://localhost" /
+--health-interval=5s --health-retries=1 busybox sh
+
+-f flag on curl is used for option to fail silenttly
+
+docker entrypoint
+it sets the main command.
+cmd can be used but cmd can be overiden but entrypoint cant
+entry cant be over ritten but can be appended on

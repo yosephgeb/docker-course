@@ -84,3 +84,36 @@ docker entrypoint
 it sets the main command.
 cmd can be used but cmd can be overiden but entrypoint cant
 entry cant be over ritten but can be appended on
+
+-------Docker Container Orchestration-------------
+Solution for orchestration that are avalible are Docker swarm, Kubernetes, Apaches mesos,
+AES ECS(elsastic container service)
+
+docker service ls
+systemctl stop docker
+systemctl status docker
+
+in order to start up three vm's and run docker on them we have to take some steps
+first a script is needed
+#!/bin/bash
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum -y install docker-ce
+systemctl start docker
+systemctl enable docker
+2. make the script executable by chmod +x docker-install.sh
+3. run the script -: ./docker-install.sh
+You can repeat the process for the numbe of vm's you want to spinn off
+
+a node is an instantce of the docker engine participating in the swarm.
+one of the node should be a manager node and apply service defination
+the manager nodes dispatches units of work called tasks to worker nodes
+
+initalizing docker swarm
+one is on the manage node and one is on the worker node
+on the manage node -: docker swarm init --advertise-addr <manager ip>
+worker node -: docker swarm join <join token> worker
+ifConfig -: in order to get the ip to make it the manage node
+ifconfig eth0
+docker swarm init --advertise-addr 172.18.19.160 (on the terminal of the manager node)
+docer swarm join <jointoken> -: this join token you get when intalizing the manager node
+

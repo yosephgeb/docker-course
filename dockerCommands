@@ -1,0 +1,33 @@
+--------------linux command---------------------------
+ifconfig
+netstat -ntlp
+curl -I 'address'
+df -h -: disk usage
+
+---------------------------Docker command--------------
+docker pull myimage:v1  -: pull from register
+docker run -dt -p 80:80 --name mycontainer myimage
+docker ps -: see all running container
+docker ps -a(-all) -: see all containers and ther status(running..)
+docker container stop mycontainer
+docker start mycontainer -:(start a previously stopped container)
+docker restart mycontainer -: restart a container
+docker container inspect mycontainer
+docker container ps -aq -: gives all the id of running container
+docker container rm mycontainer -: remove the container
+docker container rm -f mycontainer
+docker container exec -it myubuntuimage bash
+docker container run -d --restart=unless-stopped --name mycontainer myimage
+--restart=no(default), unless-stopped, alway on-failure[:max-retries]
+docker system df -: disk usage by containers images, local volumes
+docker system df -v -: per component level
+docker  container logs
+docker container run --help
+docker container run --help | grep rm
+docker build -it .
+docker image history myimage -: show the layer of the image
+docker image inspect
+docker image inspect 'image name' | grep 'what we wanted'
+docker image inspect --help
+docker image inspect myimage --format={{.Id}}'
+docker image inspect myimage --format={{.ContainerConfig}} // shows only the value

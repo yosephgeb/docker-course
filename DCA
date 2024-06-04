@@ -117,3 +117,28 @@ ifconfig eth0
 docker swarm init --advertise-addr 172.18.19.160 (on the terminal of the manager node)
 docer swarm join <jointoken> -: this join token you get when intalizing the manager node
 
+a servise is the definaion of the tasks to execute on the manager or worker nodes.
+docker service create --name webserver --replicas 1 nginx -: it is a service that runs nginx
+docker service ls
+docker service ps 'webserver'
+dpcler service rm webserver
+docker service scale webserver=5
+docer service update --replicas 3 service1
+docker service scale webserver=5 vs docker service update --replicas 5 mywebserver
+in scale we can scale multiple service at one that is docker service scale service1=2 service2=5
+
+There are two types of services deployments and they are replicated and global.
+fo a replicated serverce you specify the number of identical task you want to run
+a global service is that one task on every node. for example installation of Antivirus on one node
+will lead to the instalation of antivirus on the other nodes that are in the swarm
+
+docker service create --name antivirus --mode global -dt ubuntu
+
+draining a node when wanting to update or do something. the best way is to migrate it rather than stopping it.
+docker node update --availability drain swarm03(node) this will make the node inactive so no task will be asigned
+to it
+docker node update --availability active swarm03
+docker service inspect 'service name'
+docker service inspect 'service name' --pretty
+docker node inspect 'node name'
+docker node inspect 'node' --pretty

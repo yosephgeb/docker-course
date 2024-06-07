@@ -40,3 +40,10 @@ docker container run --rm --mount source=volumename,target=/app ubuntu:latest to
 docker volume rm myvolume
 docker container stats 'container name'
 docker container stats -: stats of all containers running
+docker container inspect --format='{{State.Health.Status}}' containername
+docker container inspect --format='{{State.Health.Status}}' containername | jq
+docker system events
+cAdvistor -:a program used for docker monitoring
+docker container cp -: copy
+docker image save 'image name' > image-name.tar -: save the image as a tarball
+docker image import 'tarfilename' -: loading am image from a tarball

@@ -3,8 +3,11 @@ ifconfig
 netstat -ntlp
 curl -I 'address'
 df -h -: disk usage
+ps -ef -: to see what is running
 
 ---------------------------Docker command--------------
+docker version -: see the docker version
+docker system info -: see the docker server info
 docker pull myimage:v1  -: pull from register
 docker run -dt -p 80:80 --name mycontainer myimage
 docker ps -: see all running container
@@ -22,6 +25,7 @@ docker container run -d --restart=unless-stopped --name mycontainer myimage
 docker system df -: disk usage by containers images, local volumes
 docker system df -v -: per component level
 docker  container logs
+docker container logs -f
 docker container run --help
 docker container run --help | grep rm
 docker build -it .
@@ -31,3 +35,8 @@ docker image inspect 'image name' | grep 'what we wanted'
 docker image inspect --help
 docker image inspect myimage --format={{.Id}}'
 docker image inspect myimage --format={{.ContainerConfig}} // shows only the value
+docker volume create 'volume name'
+docker container run --rm --mount source=volumename,target=/app ubuntu:latest touch /app/my-persistant-data
+docker volume rm myvolume
+docker container stats 'container name'
+docker container stats -: stats of all containers running

@@ -47,3 +47,7 @@ cAdvistor -:a program used for docker monitoring
 docker container cp -: copy
 docker image save 'image name' > image-name.tar -: save the image as a tarball
 docker image import 'tarfilename' -: loading am image from a tarball
+
+
+-----Docker debugging---
+docker container top 'container name'

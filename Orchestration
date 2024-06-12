@@ -1,0 +1,32 @@
+Container orchestration is all about managing the life cycle of containers, especally in large and dynamic environment.
+* provisoning and deployment of containers
+* Scaling up or removieng containers
+* movement of containers from one host to another
+* Load balacing and service discovery between containers
+* Health monitoring of containers and hosts
+Minimum of 2 web-server should be running all the time
+Example. Amazone ECS task placement. its an orchestration tool
+Container orchestration Solutions
+ * Docker Swarm, kubernetes, Apaches Mesos, AWS ECS
+Managed kubernetes like EKS -: since it would be difficult 
+
+-- docker service ls
+
+docker swarm is a container orchestration tool which is natively supported by docker
+swarm cluster -: are the collection of the nodes
+Node is an instance of the docker engine participating in the swarm
+the manager node dispatches units of work called task to the worker node
+
+--- docker swarm init --advertise-addr 'manager ip'
+--- ifconfig
+---- ifconfig eth0
+---- docker swam join --token 'copy and paste the token generated when creating the manager node'
+---- docker node ls
+when deleting a  node first it have to be demouted
+
+Service -: the defination of the task to execute on the manager or worker nodes
+
+-- docker service create --name webserver --replicas 2 nginx
+-- docker service ps webserver
+
+scaling up in swarm

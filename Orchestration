@@ -88,6 +88,9 @@ in the cd /var/lab/docker, you can find all the keys there so you have to use th
 --- docker swarm update --autolock=true
  SWMKEY-1-9g2WqHql/XH0QmIjCo3bw9VzKV9nG2vRvGHR0fyMtII
 --- docker swarm unlock
+--- docker swarm unlock-key   to retrive the key
+--- docker swarm unlock-ky --rotate
+ SWMKEY-1-ZsOw5CbfOMXzAa6ZpvWqqNXfe7t2HUA6vMjZxSrLjIc
 
 
 

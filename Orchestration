@@ -30,3 +30,51 @@ Service -: the defination of the task to execute on the manager or worker nodes
 -- docker service ps webserver
 
 scaling up in swarm
+----docker service scale sevice01=1 service03=3
+-----docker service update --replicas 1 service2
+the difference is with the first one we can scale multiple services at once.
+
+Global vs replicated service
+In global service the task is applied over the entire nodes that are present. for example
+when installing antivirus use so global so the antivirus will be applied over the entire node.
+a global is a single task so no need for replicas
+replicated is simple number of nodes that are running the same task.
+
+--- docker service create --name antivirs --mode global -dt ubuntu
+
+Draining a node.
+this is needed when a node is to be updated, restarted. you have to move the task to another 
+availible node
+  -- docker node update --availability drain swarm03
+  -- docker node update --availability active swarm03
+
+Inspect swarm and services
+-- docker service ps 'service name'
+-- docker service inspect 'service name'
+-- docker service inspect 'service name' --pretty
+-- docker node inspect 'node name'
+-- docker node inspect 'node name' --pretty
+
+ publising ports on the swarm
+if the port is not published there would be no way to access the container from the outside so it
+need to be publised when creating the service
+netstat -ntlp
+docker service create --name mywebserver --replicas 2 --publish 8080:80 nginx
+ifconfig eth0
+curl 172.18.19.160:8080
+
+Docker compose
+used when containers have dependencies on other containers
+use yaml file to put it togather
+--- docker compose up 'container names'
+--- docker compose down 'container name'
+--- docker-compose config  -: check if the syntax is correct
+if no container name is given it wil either start all the containes in the docker-compose file
+or stop them
+docke compose come togather in windows but in lunix you have to download it
+
+--- docker-compose version
+
+
+
+

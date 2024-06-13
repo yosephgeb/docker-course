@@ -66,14 +66,30 @@ curl 172.18.19.160:8080
 Docker compose
 used when containers have dependencies on other containers
 use yaml file to put it togather
---- docker compose up 'container names'
---- docker compose down 'container name'
+--- docker-compose up 'container names'
+--- docker-compose down 'container name'
 --- docker-compose config  -: check if the syntax is correct
+--- docker-compose version
 if no container name is given it wil either start all the containes in the docker-compose file
 or stop them
 docke compose come togather in windows but in lunix you have to download it
 
---- docker-compose version
+Deploying multi service apps in swarm
+Containers that have dependencies with other containers so we can use the docker stack
+A stack is a group of interrelated services that share dependencies and can be orchestrated and
+scaled together
+it can compose YAML file like docker compose
+
+-- docker stack deploy --compose-file docker-compose.yml mydemo
+
+Locking swarm cluster
+in the cd /var/lab/docker, you can find all the keys there so you have to use the lock feture
+--- docker swarm update --help
+--- docker swarm update --autolock=true
+ SWMKEY-1-9g2WqHql/XH0QmIjCo3bw9VzKV9nG2vRvGHR0fyMtII
+--- docker swarm unlock
+
+
 
 
 

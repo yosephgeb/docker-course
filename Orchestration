@@ -204,7 +204,7 @@ docker recomends the maximum number of 7 managers without the performance start 
 Manager node should only perform the manager nodes task and shouldn't act as a worker
 by defualt the manager node also can be used as node
 
--- docker node update --availability drain 'node id'
+-- docker node update --availability drain/active/pause 'node id'
 
 Recover from a lost quorm
 if the manager nodes go down the containers running on the other nodes would be continuing as
@@ -216,4 +216,5 @@ you have to create the swarm in one of the nodes
 docker system commands
 docker system info / docker info
 docker system events  -: events for docker containers, volume .....
-
+docker system df -: usage of docker like container size images volumes cache osv
+ docker swarm join --token SWMTKN-1-40sj8ho0i5o15zwbqto0x4cdbr72cxa5m00t33u5mvcj6dh8ei-33tz123sqdbwnjispvnmq8dpp 172.18.19.160:2377

@@ -120,5 +120,24 @@ control service placement
 there are different ways fou you to control the scale and placement of services on different nodes
 1. replicated and global service, 2. Resourse constaint(cpu etc) 3. placement contrainct(only runs
 on node with label pci_compliance=true) 4. placement preferences
+-- docker node update --label-add region=oslo 'node id'
+-- --docker service create --name myconstraint --constraint node.labels.region==oslo --replicas 3 nginx
+-- docker node inspect 'node id' -: heare we can find the label to apply on the node.label.region
 
+ Overlya networks
+it is the way containers in a dristributed network communicate.
+The overlay network driver creates a distrbiuted network among multiple docker daemon hosts
+overlay network allows containers connected to it to communicate securly
+it connects nodes in a swarm. when ever you create a swarm with nodes the overlay driver is
+by default translated
 
+-- docker network ls
+-- docker network inspect 'network name or id'
+on the out put there is peers which show all the ip and names of the nodes
+we can ping from the one node to another by using the ip address. this is because the overly
+have made it possible to connect securly
+
+--ping 172.18.19.160 
+
+-- docker network create --driver overlay mynetwork
+-- docker service create --name overlayservice --network mynetwork --replicas 3 nginx

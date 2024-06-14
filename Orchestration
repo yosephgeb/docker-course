@@ -92,8 +92,33 @@ in the cd /var/lab/docker, you can find all the keys there so you have to use th
 --- docker swarm unlock-ky --rotate
  SWMKEY-1-ZsOw5CbfOMXzAa6ZpvWqqNXfe7t2HUA6vMjZxSrLjIc
 
+Troubelshoot Service Deployments
+scenarios can be 1. no node can persform the task of the service. 2. all nodes are drained
+3. you reserve specific amount of memory and so on for the service and you dont't have the
+resourse specified. 4. some kind of placement constrain
+this can lead a service to be on pending state
 
+--- docker inspect 'id of the thing to be inspected'
+a json file will be produced and you can see at the status part if there is error and so on.
 
+applying constrains to the service with 
+-- docker service create --name troubleshoot --constraint=node.labels.region==1oslo --replicas 3 nginx
 
+Mounting volums in swarm
+
+-- docker service create --name myservice --mount type=volume,source=myvolume,target=/mypath nginx
+-- docker container exec -it 'container id' bash
+ ls -l / to see mypath that is specified when creating the service
+cd /mypath/    enter the mypath folder
+touch test.txt   create a file called test.txt
+-- docker volume ls
+cd /var/lib/docker/volumes/   go in to the volumes that ares created
+if the container fail since the volume is used as storage the date wont be lost
+even if you remove the service the volume will still be there.
+
+control service placement
+there are different ways fou you to control the scale and placement of services on different nodes
+1. replicated and global service, 2. Resourse constaint(cpu etc) 3. placement contrainct(only runs
+on node with label pci_compliance=true) 4. placement preferences
 
 

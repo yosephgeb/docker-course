@@ -201,6 +201,19 @@ digits/character are the same for all token that are for managers and the same f
 are workers
 docker recomends the maximum number of 7 managers without the performance start degrading
 
+Manager node should only perform the manager nodes task and shouldn't act as a worker
+by defualt the manager node also can be used as node
 
+-- docker node update --availability drain 'node id'
 
+Recover from a lost quorm
+if the manager nodes go down the containers running on the other nodes would be continuing as
+normal but all the managing ability like scaling up and down won't be able to e performed so
+you have to create the swarm in one of the nodes
+
+-- docker swarm init --force-new-cluster --advertise-addr 206.189.139.211:2377
+
+docker system commands
+docker system info / docker info
+docker system events  -: events for docker containers, volume .....
 

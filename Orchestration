@@ -161,9 +161,45 @@ The above are the things that can be put in the placehoslder
 there are three supported flags for the placeholder templates
 --hostname, --mount, --env
 
+Split-Brain and Quorum
+split brain problem
+The master/manager node is connected to the central disk and the worker node is connected to
+the central disk through the manager node. if for some reason the connection between the master 
+and the worker is at fault, the worker node will assume the manager node is down and it will promot
+itself to manager node and directly connect to the centeral disk. now both are manager and both
+witll directly access the centeral disk which can lead to data corruption.
 
+the solution is to have a quarom of 3 that is three nodes with one manager.
+in quorum all the vm's have a vote of 1. so if there is a failure of connection then the vms
+that have connection will have a higer vote. so if the manager node is not connectiong with the
+worker node then it only have a vote of one. but the other would have a vote of 2. so the one that
+have lost will disconnect from the central disk. then there would be an algorithm and one of the winning
+nodes becomes the manager and connect to the central disk.
+if the down node starts the connection then it will start as a worker node
+in this 3vm's example you can only have failure of one node
+we should maintain and odd number of nodes within a cluster
+for a quarom of 7 the majority is 4 and for a quarom of 6 is still 4. since we need a majority.
 
+Mnagers nodes are responsible for handling the cluster management tasks.
+ - maintaining cluster state
+ - scheduling services
+ - serving swarm mode HTTP API endpoints
+Use a raft implementation, the managers maiantain a consistent internal state of the entire
+swarm and all the services running on it
+An N number of manager cluster tolerates the loss of at most (N - 1) / 2 managers
+if you have 3 managers (3 -1) / 2 = 1 = it can tolerate the failure of one manager node
+it will be always rounded to the lower number 1.5 to 1 3.5 to 3
 
+-- docker swarm join-token manager  -: this will give you a token to add a node as a manage node
+--  docker swarm join --token SWMTKN-1-40sj8ho0i5o15zwbqto0x4cdbr72cxa5m00t33u5mvcj6dh8ei-03n106ltqpdv47blpt55yoti2 172.18.19.160:2377
+ if there are 2 managers then there would be no fault tolerance and if one of the manage fail then
+they all fail because (N-1) / 2 becomes 0.5 rounded to 0
+
+ -- docker swarm join-token worker
+we can see the token that is genrated for manager and worker are differnt. that is the last
+digits/character are the same for all token that are for managers and the same for those that
+are workers
+docker recomends the maximum number of 7 managers without the performance start degrading
 
 
 

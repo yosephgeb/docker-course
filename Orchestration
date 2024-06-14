@@ -150,6 +150,20 @@ it creates IPSEC tunnels betweena all nodes it uses AES algorithm in GCM mode an
 node automatically rotates the key every 12 hrs
 overlay encryption is not present in windows
 
+Creating serices using templates
+-- docker service create --name nginxservice --hostname="{{.Node.Hostname}}-{{.Service.Name}}" nginx
+hostname -: to get the hostname in the terminal
+myhostname nginxservice
+Service.id,Name,Labels
+Node.ID,Hostname
+Task.ID,Name,Slot
+The above are the things that can be put in the placehoslder
+there are three supported flags for the placeholder templates
+--hostname, --mount, --env
+
+
+
+
 
 
 

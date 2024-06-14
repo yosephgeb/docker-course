@@ -141,3 +141,16 @@ have made it possible to connect securly
 
 -- docker network create --driver overlay mynetwork
 -- docker service create --name overlayservice --network mynetwork --replicas 3 nginx
+
+Secure Overlay Networks
+to enable encryption when you create an overlay network you have to pass the --opt encrypted flag
+
+-- docker network create --opt encrypted --driver overlay my-overlay-secure-network
+it creates IPSEC tunnels betweena all nodes it uses AES algorithm in GCM mode and managers
+node automatically rotates the key every 12 hrs
+overlay encryption is not present in windows
+
+
+
+
+

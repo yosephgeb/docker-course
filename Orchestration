@@ -20,7 +20,7 @@ the manager node dispatches units of work called task to the worker node
 --- docker swarm init --advertise-addr 'manager ip'
 --- ifconfig
 ---- ifconfig eth0
----- docker swam join --token 'copy and paste the token generated when creating the manager node'
+---- docker swarm join --token 'copy and paste the token generated when creating the manager node'
 ---- docker node ls
 when deleting a  node first it have to be demouted
 

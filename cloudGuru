@@ -1,0 +1,2 @@
+chapter 3 introduction to docker registry
+  docker run --entrypoint htpasswd registry:2-7-0(registry:2 is broken) -Bbn testuser password > auth/htpasswd
